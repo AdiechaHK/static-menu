@@ -12,23 +12,24 @@
 </head>
 <body>
   <div id="app">
-    <h1>Nescafe - Menu</h1>
-
-    <table>
-      <tbody>
-        <tr v-for="(item, i) in menu" :bind="i" @click="addItem(item)">
-          <template v-if="item.title">
-            <td colspan="2">
-              <strong>{{item.val}}</strong>
-            </td>
-          </template>
-          <template v-else>
-            <td> {{item.val}} </td>
-            <td> ₹ {{item.amt}} </td>
-          </template>
-        </tr>
-      </tbody>
-    </table>
+    <div>
+      <h1>Nescafe - Menu</h1>
+      <table>
+        <tbody>
+          <tr v-for="(item, i) in menu" :bind="i" @click="addItem(item)">
+            <template v-if="item.title">
+              <td colspan="2" class="bg-green-600">
+                <strong>{{item.val}}</strong>
+              </td>
+            </template>
+            <template v-else>
+              <td> {{item.val}} </td>
+              <td> ₹ {{item.amt}} </td>
+            </template>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
     <div>
       Order
@@ -49,13 +50,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
-  <script src="app.js"></script>
-  <script>
-  	initApp(
-      '77808af6ad9bf5d35240baaae9d5f8ba', // GistID
-      'nescafe.csv' // filename
-    )
-  </script>
-
+  <script type="module" src="app.js"></script>
 </body>
 </html>

@@ -1,6 +1,32 @@
+import getConf from './config.js';
+
 const gistUrl = id => "https://api.github.com/gists/" + id;
 
-const initApp = (id, filename) => {
+const getStore = () => {
+    let s = window.location.search;
+    if (s.length > 0 && s.startsWith('?')) {
+        let queryParams = s.substring(1).split('&').map(x => x.split('=')).reduce((qs,ele) =>{
+            let [k, v] = ele;
+            qs[k] = v;
+            return qs;
+        }, {});
+        if(queryParams.hasOwnProperty('store')) {
+            return queryParams.store;
+        } else {
+            console.error("Please pass store value in the URL");
+        }
+    }
+    else {
+        console.error("Store does not specified.")
+    }
+}
+
+const initApp = () => {
+
+    const { id, filename, contact, msgFormat } = (getConf(getStore()))
+
+    console.log(id, filename, contact)
+
     const app = new Vue({
         el: "#app",
         data: {
@@ -11,22 +37,11 @@ const initApp = (id, filename) => {
         },
         computed: {
             walink() {
-                let text = this.order.map(li => `${li.val} - ${li.qty}`).join("\n")
-                let finalAmt = this.order.map(li => li.qty * li.amt).reduce((a, b) => a+b, 0)
-                text += `\n\nFinal Amount to pay *${finalAmt}*\n\nAddress: ${this.address}`
-                const link = "https://wa.me/919033319723?text=" + encodeURI(text)
-                return link;
+                let text = encodeURI(msgFormat(this.order, this.address));
+                return `https://wa.me/${contact}?text=${text}`;
             }
         },
         methods: {
-            sendOrderMsg() {
-                let text = this.order.map(li => `${li.val} - ${li.qty}`).join("\n")
-                let finalAmt = this.order.map(li => li.qty * li.amt).reduce((a, b) => a+b, 0)
-                text += `\n\nFinal Amount to pay *${finalAmt}*\n\nAddress: ${this.address}`
-                const link = "https://wa.me/919033319723?text=" + encodeURI(text)
-                console.log(link)
-                window.href = link
-            },
             addItem(item) {
                 if (item.title === true) {
                     console.log("Title can't adde to the order.")
@@ -44,9 +59,8 @@ const initApp = (id, filename) => {
         },
         created() {
             axios.get(gistUrl(id)).then(({data}) => {
-                console.log(data.files)
                 if(data.files.hasOwnProperty(filename)) {
-                    fileContent = data.files[filename]['content']
+                    let fileContent = data.files[filename]['content']
                     this.menu = fileContent.split("\n").map(line => {
                         let splitted = line.split(",")
                         if (splitted.length === 1) {
@@ -72,3 +86,9 @@ const initApp = (id, filename) => {
     });
 }
 
+
+initApp(
+    '77808af6ad9bf5d35240baaae9d5f8ba', // GistID
+    'teapost.csv', // filename
+    '919033319723'
+)
