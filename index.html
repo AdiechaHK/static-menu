@@ -44,8 +44,8 @@
               </td>
             </template>
             <template v-else>
-              <td class="bg-gray-200 px-2"> {{item.val}} </td>
-              <td class="bg-gray-200 text-right px-2"> ₹ {{item.amt}} </td>
+              <td class="bg-gray-200 p-2"> {{item.val}} </td>
+              <td class="bg-gray-200 text-right p-2"> ₹ {{item.amt}} </td>
             </template>
           </tr>
         </tbody>
@@ -65,13 +65,13 @@
         </thead>
         <tbody>
           <tr v-for="(oi,i) in order">
-            <td class="bg-gray-200 px-2 text-left"> {{ oi.val }} (₹{{ oi.amt }}) </td>
-            <td class="bg-gray-200 px-2 text-center">
-              <button @click="addQty(oi,-1)" class="bg-green-600 text-gray-200 m-2 rounded-full w-8 h-8"> - </button>
-              {{ oi.qty }}
-              <button @click="addQty(oi,1)" class="bg-green-600 text-gray-200 m-2 rounded-full w-8 h-8"> + </button>
+            <td class="bg-gray-200 p-2 text-left"> {{ oi.val }} (₹{{ oi.amt }}) </td>
+            <td class="bg-gray-200 py-2 w-24 text-center">
+              <button @click="addQty(oi,-1)" class="bg-green-600 text-gray-200 my-2 rounded-full w-8 h-8"> - </button>
+              <span class="mx-1">{{ oi.qty }}</span>
+              <button @click="addQty(oi,1)" class="bg-green-600 text-gray-200 my-2 rounded-full w-8 h-8"> + </button>
             </td>
-            <td class="bg-gray-200 px-2 text-right"> ₹ {{ Number(oi.amt) * Number(oi.qty) }} </td>
+            <td class="bg-gray-200 p-2 text-right"> ₹ {{ Number(oi.amt) * Number(oi.qty) }} </td>
           </tr>
         </tbody>
         <tfoot>

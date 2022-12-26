@@ -23,19 +23,18 @@ const getStore = () => {
 
 const initApp = () => {
 
-    const { id, filename, contact, msgFormat } = (getConf(getStore()))
-
-    console.log(id, filename, contact)
-
+    const storeName = getStore();
+    const getLsKey = (k) => `${storeName}_${k}`;
+    const { id, filename, contact, msgFormat } = (getConf(storeName));
     const app = new Vue({
         el: "#app",
         data: {
             gistId: id,
             menu: [],
-            order: [],
-            address: '',
+            order: window.localStorage.getItem(getLsKey('order')) ?JSON.parse(window.localStorage.getItem(getLsKey('order'))): [],
+            address: window.localStorage.getItem(getLsKey('address')) || '',
             page: 'menu',
-            notes: ''
+            notes: window.localStorage.getItem(getLsKey('notes')) || ''
         },
         computed: {
             total() {
@@ -57,7 +56,8 @@ const initApp = () => {
                         if(this.order.length == 0) this.page = 'menu';
                     } else return;
                 }
-                oi.qty += n
+                oi.qty += n;
+                window.localStorage.setItem(getLsKey('order'), JSON.stringify(this.order));
             },
             placeOrder() {
                 let verr = null
@@ -70,7 +70,12 @@ const initApp = () => {
                 }
 
                 if(verr) alert(verr);
-                else window.location.href = this.walink
+                else {
+                    window.localStorage.setItem(getLsKey('order'), JSON.stringify([]));
+                    window.localStorage.setItem(getLsKey('address'), this.address);
+                    window.localStorage.setItem(getLsKey('notes'), this.notes);
+                    window.location.href = this.walink;
+                }
             },
             addItem(item) {
                 if (item.title === true) {
@@ -84,6 +89,7 @@ const initApp = () => {
                     } else {
                         this.order[indx]["qty"] += 1;
                     }
+                    window.localStorage.setItem(getLsKey('order'), JSON.stringify(this.order));
                 }
             }
         },
