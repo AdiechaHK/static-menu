@@ -33,7 +33,7 @@ const initApp = () => {
             menu: [],
             order: window.localStorage.getItem(getLsKey('order')) ?JSON.parse(window.localStorage.getItem(getLsKey('order'))): [],
             address: window.localStorage.getItem(getLsKey('address')) || '',
-            page: 'order',
+            page: 'menu',
             notes: window.localStorage.getItem(getLsKey('notes')) || ''
         },
         computed: {
