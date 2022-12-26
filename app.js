@@ -50,6 +50,28 @@ const initApp = () => {
             }
         },
         methods: {
+            addQty(oi, n) {
+                if(oi.qty + n === 0) {
+                    if(confirm(`Do you want to remove '${oi.val}'?`)) {
+                        this.order = this.order.filter(item => item.val != oi.val)
+                        if(this.order.length == 0) this.page = 'menu';
+                    } else return;
+                }
+                oi.qty += n
+            },
+            placeOrder() {
+                let verr = null
+                // Validate order
+                if (this.totalItems <= 0 && this.total <= 0) {
+                    verr = "Please add item for make an order.";
+                }
+                else if (this.address.trim().length <= 0) {
+                    verr = "Address is requried to make an order.";
+                }
+
+                if(verr) alert(verr);
+                else window.location.href = this.walink
+            },
             addItem(item) {
                 if (item.title === true) {
                     console.log("Title can't adde to the order.")
