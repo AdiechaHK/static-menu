@@ -9,43 +9,102 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
   <title>Menu Nescafe</title>
+  <style>
+    [v-cloak] { display: none; }
+  </style>
 </head>
 <body>
-  <div id="app">
-    <div>
-      <h1>Nescafe - Menu</h1>
-      <table>
+  <div id="app" class="w-full max-w-sm mx-auto">
+    <div v-show="page === 'menu'">
+      <button
+        v-if="totalItems"
+        v-cloak
+        class="animate-pulse float-right mt-2 border bg-blue-600 rounded-full w-8 h-8 text-white"
+        @click="page = 'order'">
+        {{ totalItems }}
+      </button>
+      <h1 class="text-2xl my-3">Menu</h1>
+      <div v-if="!menu.length">
+        <span
+        class="animate-spin float-left my-10 border-t-4 border-blue-600 rounded-full w-8 h-8"
+        >
+        &nbsp;
+        </span>
+        <span class="animate-pulse float-left ml-5 mt-11">
+          Loading ...
+        </span>
+      </div>
+      
+      <table class="w-full max-w-sm">
         <tbody>
           <tr v-for="(item, i) in menu" :bind="i" @click="addItem(item)">
             <template v-if="item.title">
-              <td colspan="2" class="bg-green-600">
+              <td colspan="2" class="bg-green-600 text-gray-200 px-3 py-2">
                 <strong>{{item.val}}</strong>
               </td>
             </template>
             <template v-else>
-              <td> {{item.val}} </td>
-              <td> ₹ {{item.amt}} </td>
+              <td class="bg-gray-200 px-2"> {{item.val}} </td>
+              <td class="bg-gray-200 text-right px-2"> ₹ {{item.amt}} </td>
             </template>
           </tr>
         </tbody>
       </table>
+      <button v-cloak @click="page = 'order'" class="w-full bg-blue-600 text-white rounded-md p-2 mt-2"> Next </button>
     </div>
 
-    <div>
-      Order
+    <div v-cloak v-show="page === 'order'">
+      <h1 class="text-2xl my-3">Order</h1>
+      <table class="w-full max-w-sm">
+        <thead>
+          <tr>
+            <th class="bg-green-600 text-gray-200 px-3 py-2 text-left">Item</th>
+            <th class="bg-green-600 text-gray-200 px-3 py-2 text-center">Qty</th>
+            <th class="bg-green-600 text-gray-200 px-3 py-2 text-right">Payable</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(oi,i) in order">
+            <td class="bg-gray-200 px-2 text-left"> {{ oi.val }} (₹{{ oi.amt }}) </td>
+            <td class="bg-gray-200 px-2 text-center"> {{ oi.qty }} </td>
+            <td class="bg-gray-200 px-2 text-right"> ₹ {{ Number(oi.amt) * Number(oi.qty) }} </td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <!-- bg-green-600 text-gray-200 px-3 py-2 -->
+            <th colspan="2" class="text-left bg-green-600 text-gray-200 px-3 py-2">
+              Total
+            </th>
+            <th class="bg-green-600 text-gray-200 px-3 py-2 text-right"> ₹ {{ total}} </th>
+          </tr>
+        </tfoot>
+      </table>
+      <div class="mt-2 grid gap-4 grid-cols-2">
+        <button class="bg-blue-600 text-white rounded-md p-2" @click="page = 'menu'">Back</button>
+        <button class="bg-blue-600 text-white rounded-md p-2" @click="page = 'address'">Next</button>
+      </div>
+    </div>
+
+    <div v-cloak v-show="page === 'address'">
+      <h1 class="text-2xl my-3">Confirm & Place Order</h1>
       <hr>
-      {{ order }}
+      <div class="mt-3 mb-1">
+        Address
+        <span class="text-gray-500 text-sm">(Building and/or Office Number)</span>
+      </div>
+      <input class="bg-gray-200 w-full p-2 border-2 rounded-md border-green-600" type="text" v-model="address">
+      <div class="mt-3 mb-1">
+        Notes
+        <span class="text-gray-500 text-sm">(Optional: Additional instructions)</span>
+      </div>
+      <textarea class="bg-gray-200 w-full p-2 border-2 rounded-md border-green-600" v-model="notes" ></textarea>
+      <div class="mt-2 grid gap-4 grid-cols-2">
+        <button class="bg-blue-600 text-white rounded-md p-2" @click="page = 'order'">Back</button>
+        <a class="bg-blue-600 text-white rounded-md p-2 text-center" :href="walink">Done</a>
+      </div>
     </div>
 
-    <div>
-      address
-      <input type="text" v-model="address">
-    </div>
-
-    <pre>{{address}}</pre>
-
-    <a :href="walink">send</a>
-    <!-- <button @click="sendOrderMsg()">Send Order</button> -->
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>

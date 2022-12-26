@@ -33,11 +33,19 @@ const initApp = () => {
             gistId: id,
             menu: [],
             order: [],
-            address: ''
+            address: '',
+            page: 'menu',
+            notes: ''
         },
         computed: {
+            total() {
+                return this.order.map(li => li.qty * li.amt).reduce((a, b) => a+b, 0)
+            },
+            totalItems() {
+                return this.order.reduce((ttl, li) => ttl+li.qty, 0)
+            },
             walink() {
-                let text = encodeURI(msgFormat(this.order, this.address));
+                let text = encodeURI(msgFormat(this.order, this.address, this.notes));
                 return `https://wa.me/${contact}?text=${text}`;
             }
         },
@@ -86,9 +94,4 @@ const initApp = () => {
     });
 }
 
-
-initApp(
-    '77808af6ad9bf5d35240baaae9d5f8ba', // GistID
-    'teapost.csv', // filename
-    '919033319723'
-)
+initApp()
