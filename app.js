@@ -33,7 +33,7 @@ const initApp = () => {
             menu: [],
             order: window.localStorage.getItem(getLsKey('order')) ?JSON.parse(window.localStorage.getItem(getLsKey('order'))): [],
             address: window.localStorage.getItem(getLsKey('address')) || '',
-            page: 'menu',
+            page: 'order',
             notes: window.localStorage.getItem(getLsKey('notes')) || ''
         },
         computed: {
@@ -49,6 +49,13 @@ const initApp = () => {
             }
         },
         methods: {
+            removeAll() {
+                if(confirm('Are you sure you want to remove all ' + this.totalItems + ' itmes?')) {
+                    this.order = [];
+                    window.localStorage.setItem(getLsKey('order'), JSON.stringify(this.order));
+                    this.page = 'menu'
+                }
+            },
             addQty(oi, n) {
                 if(oi.qty + n === 0) {
                     if(confirm(`Do you want to remove '${oi.val}'?`)) {

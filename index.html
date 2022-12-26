@@ -50,10 +50,11 @@
           </tr>
         </tbody>
       </table>
-      <button v-cloak @click="page = 'order'" class="w-full bg-blue-600 text-white rounded-md p-2 mt-2"> Next </button>
+      <button v-cloak @click="order.length ? page = 'order': alert('Please add item, to move forward.')" class="w-full bg-blue-600 text-white rounded-md p-2 mt-2"> Next </button>
     </div>
 
     <div v-cloak v-show="page === 'order'">
+      <button @click="removeAll" class="float-right my-1 border border-red-600 px-2 py-1 rounded-md text-red-600">Remove All</button>
       <h1 class="text-2xl my-3">Order</h1>
       <table class="w-full max-w-md">
         <thead>
