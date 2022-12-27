@@ -1,8 +1,8 @@
 const defaultMsgFormat = (order, address, notes) => {
     let text = order.map(li => `${li.val} - ${li.qty}`).join("\n")
     let finalAmt = order.map(li => li.qty * li.amt).reduce((a, b) => a+b, 0)
-    let n = notes.trim().length > 0 ? `\n\n${notes.trim()}`: ''
-    return text + `\n\nFinal Amount to pay *${finalAmt}*${notes}\n\nAddress: ${address}`
+    let n = notes.trim().length > 0 ? `\n\n_Note: ${notes}_`: ''
+    return text + `\n\nFinal Amount to pay *${finalAmt}*${n}\n\nAddress: ${address}`
 }
 
 const masterConf = {
