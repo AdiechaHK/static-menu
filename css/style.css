@@ -1,6 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@200;300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&family=Sevillana&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&display=swap');
 body {
-  font-family: "Chivo Mono", serif;
+  font-family: "Inter", sans-serif;
 }
 .main {
   position: relative;
