@@ -33,6 +33,7 @@ const initApp = () => {
     data: {
       gistId: id,
       menu: [],
+      search: '',
       order: window.localStorage.getItem(getLsKey("order"))
         ? JSON.parse(window.localStorage.getItem(getLsKey("order")))
         : [],
@@ -44,6 +45,9 @@ const initApp = () => {
       sending: false
     },
     computed: {
+      filtered_menu() {
+        return this.menu.filter(a => a.val.toLowerCase().indexOf(this.search.toLowerCase()) != -1);
+      },
       total() {
         return this.order
           .map((li) => li.qty * li.amt)
