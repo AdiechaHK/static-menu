@@ -40,6 +40,7 @@ const initApp = () => {
       page: "menu",
       notes: window.localStorage.getItem(getLsKey("notes")) || "",
       isItemAddedToCart: false,
+      credit: false
     },
     computed: {
       total() {

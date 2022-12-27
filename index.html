@@ -121,6 +121,29 @@
       </div>
     </div>
 
+    <div class="mt-3 text-center">
+      <span @click="credit = true" class="cursor-pointer">
+        Proudly Made in 🇮🇳 by Bansari Tech
+      </span>
+    </div>
+    <div v-if="credit" class="absolute left-0 top-0 bg-gray-200 h-screen w-screen">
+      <div class="w-full max-w-md mx-auto">
+        <button class="float-right mt-1 text-2xl mr-4" @click="credit=false">&times;</button>
+        <h1 class="text-2xl text-center my-5 pt-1">Credits</h1>
+        <div class="bg-white rounded-xl p-4 shadow-xl">
+          <h2 class="text-xl">
+            Prepared by 
+            <a target="_blank" href="https://bansari.tech">Bansari Tech 🔗</a>
+          </h2>
+          <hr class="my-2">
+          <ul class="list-disc ml-5">
+            <li>Harikrushna V. Adiecha</li>
+            <li>Yogesh K. Devaliya</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
