@@ -16,28 +16,31 @@
 </head>
 <body>
   <div id="app" class="w-full max-w-md mx-auto px-2">
+
     <div v-show="page === 'menu'">
-      <button
-        v-if="totalItems"
-        v-cloak
-        class="flex border-2 border-green-500 p-0.5 px-3 hover:bg-green-100 outline-none rounded items-center justify-center float-right mt-2"
-        @click="page = 'order'">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-shopping-cart" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
-          <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-          <circle cx="6" cy="19" r="2" />
-          <circle cx="17" cy="19" r="2" />
-          <path d="M17 17h-11v-14h-2" />
-          <path d="M6 5l14 1l-1 7h-13" />
-        </svg>&nbsp;
-        <span class="font-semibold">
-          {{ totalItems }}
+      <div class="sticky top-0 py-2 bg-white border-b-2 border-green-600 z-50">
+        <button
+          v-if="totalItems"
+          v-cloak
+          class="flex border-2 border-green-500 p-0.5 px-3 hover:bg-green-100 outline-none rounded items-center justify-center float-right mt-2"
+          @click="page = 'order'">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-shopping-cart" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <circle cx="6" cy="19" r="2" />
+            <circle cx="17" cy="19" r="2" />
+            <path d="M17 17h-11v-14h-2" />
+            <path d="M6 5l14 1l-1 7h-13" />
+          </svg>&nbsp;
+          <span class="font-semibold">
+            {{ totalItems }}
+          </span>
+        </button>
+        <h1 class="text-2xl my-3">Menu</h1>
+        <span :class="['toast', { active: isItemAddedToCart }]">
+          Added to cart
         </span>
-      </button>
-      <h1 class="text-2xl my-3">Menu</h1>
-      <span :class="['toast', { active: isItemAddedToCart }]">
-        Added to cart
-      </span>
-      <input v-model="search" type="text" class="bg-gray-200 p-2 w-full" placeholder="Search...">
+        <input v-model="search" type="text" class="bg-gray-200 p-2 w-full" placeholder="Search...">
+      </div>
       <div v-if="!menu.length">
         <span
         class="animate-spin float-left my-10 border-t-4 border-blue-600 rounded-full w-8 h-8"
@@ -57,8 +60,15 @@
               </td>
             </template>
             <template v-else>
-              <td class="bg-gray-200 cursor-pointer p-2"> {{item.val}} </td>
-              <td class="bg-gray-200 cursor-pointer text-right p-2"> ₹ {{item.amt}} </td>
+              <td :class="['bg-gray-200 cursor-pointer p-2',{'bg-gray-300 text-green-700 font-bold':itemCount[item.val]}]">
+                {{item.val}}
+                <span v-if="itemCount[item.val]" class="absolute ml-2 mt-1 text-xs text-green-700 bg-gray-100 w-4 pl-1 rounded-full">
+                  {{ itemCount[item.val] }}
+                </span>
+              </td>
+              <td :class="['bg-gray-200 cursor-pointer text-right p-2',{'bg-gray-300 text-green-700 font-bold':itemCount[item.val]}]">
+                ₹ {{item.amt}}
+              </td>
             </template>
           </tr>
         </tbody>
@@ -133,16 +143,17 @@
       </div>
     </div>
 
-    <div class="my-5 text-center">
+    <div class="mt-5 mb-20 text-center">
       <span @click="credit = true" class="cursor-pointer">
         Proudly Made in 🇮🇳 by Bansari Tech
       </span>
     </div>
-    <div v-if="credit" class="absolute left-0 top-0 bg-gray-200 h-screen w-screen">
+
+    <div v-if="credit" class="fixed left-0 top-0 bg-gray-200 h-screen w-screen">
       <div class="w-full max-w-md mx-auto">
         <button class="float-right mt-1 text-2xl mr-4" @click="credit=false">&times;</button>
         <h1 class="text-2xl text-center my-5 pt-1">Credits</h1>
-        <div class="bg-white rounded-xl p-4 shadow-xl">
+        <div class="bg-white rounded-xl p-4 shadow-xl mx-2">
           <h2 class="text-xl">
             Prepared by 
             <a target="_blank" href="https://bansari.tech">Bansari Tech 🔗</a>
