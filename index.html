@@ -18,7 +18,7 @@
   <div id="app" class="w-full max-w-md mx-auto px-2">
 
     <div v-show="page === 'menu'">
-      <div class="sticky top-0 py-2 bg-white border-b-2 border-green-600 z-50">
+      <div class="sticky top-0 py-2 bg-white border-b-2 border-green-600 z-40">
         <button
           v-if="totalItems"
           v-cloak
@@ -149,7 +149,7 @@
       </span>
     </div>
 
-    <div v-if="credit" class="fixed left-0 top-0 bg-gray-200 h-screen w-screen">
+    <div v-if="credit" class="z-50 fixed left-0 top-0 bg-gray-200 h-screen w-screen">
       <div class="w-full max-w-md mx-auto">
         <button class="float-right mt-1 text-2xl mr-4" @click="credit=false">&times;</button>
         <h1 class="text-2xl text-center my-5 pt-1">Credits</h1>
