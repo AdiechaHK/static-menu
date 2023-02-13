@@ -15,7 +15,7 @@ const masterConf = {
         msgFormat: defaultMsgFormat
     },
     shree: {
-        contact: '919033319723',
+        contact: '916359809960',
         msgFormat: defaultMsgFormat
     }
 }
