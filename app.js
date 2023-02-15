@@ -109,33 +109,10 @@ const initApp = () => {
         else {
           // console.log(msgFormat(this.order, this.address, this.notes))
           this.sending = true
-          const redirectToWa = () => {
-            window.localStorage.setItem(getLsKey("order"), JSON.stringify([]));
-            window.localStorage.setItem(getLsKey("address"), this.address);
-            window.localStorage.setItem(getLsKey("notes"), this.notes);
-            window.location.href = this.walink;
-          }
-
-          fetch('https://discord.com/api/webhooks/1057252433711087668/50weA4aBLMPM3d43xotKKc7K5UYqNARfEnSnlJWsrhnlyIEipEcKpDPlh2faJahoCxOg', {
-            method: "POST",
-            headers: {
-                'Content-type': 'application/json'
-            },
-            body: JSON.stringify({
-              username: storeName || 'Default store',
-              content: `We get new order of ₹${this.total}.`,
-            })
-          }).then(res => {
-            console.log(res);
-            axios.post("https://1moy5z33sa.execute-api.us-east-1.amazonaws.com/dev/orders", {
-              storeName,
-              order: this.order,
-              address: this.address,
-              notes: this.notes,
-              amount: this.total,
-              item_count: this.totalItems
-            }).then(redirectToWa).catch(console.error)
-          }) 
+          window.localStorage.setItem(getLsKey("order"), JSON.stringify([]));
+          window.localStorage.setItem(getLsKey("address"), this.address);
+          window.localStorage.setItem(getLsKey("notes"), this.notes);
+          window.location.href = this.walink;
         }
       },
       addItem(item) {
