@@ -15,6 +15,7 @@ const masterConf = {
         msgFormat: defaultMsgFormat
     },
     shree: {
+        title: 'Shree Eatery',
         contact: '916359809960',
         msgFormat: defaultMsgFormat
     }

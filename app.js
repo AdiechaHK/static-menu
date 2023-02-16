@@ -27,7 +27,7 @@ const getStore = () => {
 const initApp = () => {
   const storeName = getStore();
   const getLsKey = (k) => `${storeName}_${k}`;
-  const { id, filename, contact, msgFormat } = getConf(storeName);
+  const { id, filename, contact, msgFormat, title } = getConf(storeName);
   const app = new Vue({
     el: "#app",
     data: {
@@ -141,6 +141,7 @@ const initApp = () => {
       },
     },
     created() {
+      document.title = title || 'Menu';
       axios
         .get(gistUrl(id))
         .then(({ data }) => {
