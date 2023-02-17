@@ -21,7 +21,7 @@ const masterConf = {
     },
     cafe24: {
         title: 'Cafe 24',
-        contact: '916359809960',
+        contact: '918780546747',
         msgFormat: defaultMsgFormat
     }
 }
