@@ -16,7 +16,7 @@ const masterConf = {
     },
     shree: {
         title: 'Shree Eatery',
-        contact: '916359809960',
+        contact: '919824942719',
         msgFormat: defaultMsgFormat
     },
     cafe24: {
