@@ -23,6 +23,11 @@ const masterConf = {
         title: 'Cafe 24',
         contact: '918780546747',
         msgFormat: defaultMsgFormat
+    },
+    amrit: {
+        title: 'Amrit Aahar',
+        contact: '919033319723',
+        msgFormat: defaultMsgFormat
     }
 }
 
