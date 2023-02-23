@@ -26,12 +26,12 @@ const masterConf = {
     },
     amrit: {
         title: 'Amrit Aahar',
-        contact: '919033319723',
+        contact: '919099581663',
         msgFormat: defaultMsgFormat
     },
     rajbhog: {
         title: 'Rajbhog Restorent',
-        contact: '916359809960',
+        contact: '916358763387',
         msgFormat: defaultMsgFormat
     },
     teapost2: {
