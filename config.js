@@ -29,6 +29,11 @@ const masterConf = {
         contact: '919099581663',
         msgFormat: defaultMsgFormat
     },
+    scuzo: {
+        title: 'SCUZO',
+        contact: '916359809960',
+        msgFormat: defaultMsgFormat
+    },
     rajbhog: {
         title: 'Rajbhog Restorent',
         contact: '916358763387',
