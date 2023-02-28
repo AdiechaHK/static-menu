@@ -73,8 +73,8 @@
                   {{ itemCount[item.val] }}
                 </span>
               </td>
-              <td :class="['bg-gray-200 cursor-pointer text-right p-2',{'bg-gray-300 text-green-700 font-bold':itemCount[item.val]}]">
-                ₹ {{item.amt}}
+              <td :class="['align-top bg-gray-200 cursor-pointer text-right p-2',{'bg-gray-300 text-green-700 font-bold':itemCount[item.val]}]">
+                ₹&nbsp;{{item.amt}}
               </td>
             </template>
           </tr>
@@ -100,7 +100,7 @@
             <td class="bg-gray-200 py-2 w-24 text-center">
               <button @click="addQty(oi,-1)" class="bg-green-600 text-gray-200 my-2 rounded-full w-6 h-6 font-bold"> - </button><span class="mx-1">{{ oi.qty }}</span><button @click="addQty(oi,1)" class="bg-green-600 text-gray-200 my-2 rounded-full w-6 h-6 font-bold"> + </button>
             </td>
-            <td class="bg-gray-200 p-2 text-right"> ₹ {{ Number(oi.amt) * Number(oi.qty) }} </td>
+            <td class="bg-gray-200 p-2 text-right min-w-max"> ₹ {{ Number(oi.amt) * Number(oi.qty) }} </td>
           </tr>
         </tbody>
         <tfoot>
@@ -109,7 +109,7 @@
             <th colspan="2" class="text-left bg-green-600 text-gray-200 px-3 py-2">
               Total
             </th>
-            <th class="bg-green-600 text-gray-200 px-3 py-2 text-right"> ₹ {{ total}} </th>
+            <th class="bg-green-600 text-gray-200 px-3 py-2 text-right min-w-max"> ₹ {{ total}} </th>
           </tr>
         </tfoot>
       </table>
