@@ -31,7 +31,7 @@ const masterConf = {
     },
     scuzo: {
         title: 'SCUZO',
-        contact: '916359809960',
+        contact: '917984477177',
         msgFormat: defaultMsgFormat
     },
     rajbhog: {
