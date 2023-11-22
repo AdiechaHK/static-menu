@@ -43,6 +43,11 @@ const masterConf = {
         title: 'Tea Post',
         contact: '919537999117',
         msgFormat: defaultMsgFormat
+    },
+    creamento: {
+        title: 'Creamento',
+        contact: '919974263169',
+        msgFormat: defaultMsgFormat
     }
 }
 
